@@ -22,7 +22,20 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="model\pythonCodeModel.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="python_rule_based_parser.py" />
+    <Compile Include="utilities\fileLoader.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="utilities\scanner.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="model\" />
+    <Folder Include="utilities\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

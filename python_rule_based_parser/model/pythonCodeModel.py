@@ -12,3 +12,7 @@ class pythonCodeModel:
     def get_code():
 
         return self.code
+
+    def get_code_line(line_number):
+
+        return self.code[line_number]
