@@ -1,10 +1,15 @@
 class tokenizer:
     """"Tokenizes a code string"""
 
-    def __init__(self):
+    def __init__(self, codeToTokenize):
+
+        self.code = codeToTokenize
+
         return super().__init__()
 
     def tokenizer(self):
+
+        # Loop through self.code to find interesting events.
 
         return
 

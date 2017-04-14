@@ -2,7 +2,7 @@ from pypeg2 import parse
 
 from python_rule_based_parser.utilities.fileLoader import fileLoader
 
-class Tokenizer:
+class python_rule_based_parser:
 
     def __init__(self):
         
@@ -16,6 +16,10 @@ class Tokenizer:
 
         # Scan the python_code
 
-        # Parse the information returned by the scanner
+        tokenize = tokenizer()
+
+        tokenize.tokenize()
+
+        # Parse the information returned by the tokenizer
 
         return
