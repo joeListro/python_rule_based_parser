@@ -5,6 +5,8 @@ from python_rule_based_parser.utilities.fileLoader import fileLoader
 class python_rule_based_parser:
 
     def __init__(self):
+
+        self.python_code = ""
         
         return super().__init__()
 
@@ -12,11 +14,11 @@ class python_rule_based_parser:
         
         file_loader = fileLoader(file)
         
-        python_code = file_loader.load_file(file) # fileLoader.load_file() returns a pythonCodeModel object
+        self.python_code = file_loader.load_file(file) 
 
         # Scan the python_code
 
-        tokenize = tokenizer()
+        tokenize = tokenizer(self.python_code)
 
         tokenize.tokenize()
 
