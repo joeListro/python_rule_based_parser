@@ -1,5 +1,3 @@
-from python_rule_based_parser.model.pythonCodeModel import pythonCodeModel
-
 class fileLoader:
     """Load text from file"""
 
@@ -13,6 +11,4 @@ class fileLoader:
         with open (pathToFile, "r") as file:
             code = file.readlines()
 
-        python_code = pythonCodeModel(code)
-
-        return python_code
+        return code
