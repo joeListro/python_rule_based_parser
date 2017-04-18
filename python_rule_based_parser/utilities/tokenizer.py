@@ -7,11 +7,33 @@ class tokenizer:
 
         return super().__init__()
 
-    def tokenizer(self):
+    def tokenize(self):
 
-        # Loop through self.code to find interesting events.
+        tokens = []
 
-        return
+        currentToken = "Token00:"
+
+        for letter in self.code:
+            if self.isSegueChar(letter):
+                tokens.append(currentToken)
+                currentToken = "Token00:"
+
+            if self.isSingleToken(letter):
+                tokens.append(currentToken)
+                currentToken = "Token00:"
+                tokens.append("Token00:" + letter)
+
+            else:
+                currentToken += letter
+
+        return tokens
+
+    def isSegueChar(self, currentChar):
+
+        if (self.isSpaceOrTab(currentChar) or self.isNewLine(currentChar or self.isCarriageReturn(currentChar)):
+            return True
+
+        return False
 
     def isSpaceOrTab(self, currentChar):
 
@@ -52,17 +74,3 @@ class tokenizer:
             return True
 
         return False
-
-    def isDoubleToken(self, currentChar):
-
-        if (currentChar == '{'):
-            return False
-
-        return True
-
-    def isIdentifierChar(self, currentChar):
-
-        if(self.isSingleToken(currentChar) or self.isSpaceOrTab(currentChar) or self.isNewLine(currentChar) or self.isCarriageReturn(currentChar)):
-            return False
-
-        return True

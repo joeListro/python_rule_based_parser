@@ -1,27 +1,28 @@
 from pypeg2 import parse
 
-from python_rule_based_parser.utilities.fileLoader import fileLoader
+from python_rule_based_parser.utilities.file_IO import file_IO
+from python_rule_based_parser.utilities.tokenizer import tokenizer
 
 class python_rule_based_parser:
 
     def __init__(self):
 
-        self.python_code = ""
+        self.code_string = ""
+
+        self.parsed_code = []
         
         return super().__init__()
 
     def __parse__(self, file):
         
-        file_loader = fileLoader(file)
+        fileIO = file_IO(file)
         
-        self.python_code = file_loader.load_file(file) 
+        self.code_string = fileIO.input(file) 
 
-        # Scan the python_code
+        tokenizer = tokenizer(self.code_string)
 
-        tokenize = tokenizer(self.python_code)
+        self.parsed_code = tokenizer.tokenize()
 
-        tokenize.tokenize()
-
-        # Parse the information returned by the tokenizer
+        fileIO.output(file, self.parsed_code)
 
         return
