@@ -30,7 +30,7 @@ class tokenizer:
 
     def isSegueChar(self, currentChar):
 
-        if (self.isSpaceOrTab(currentChar) or self.isNewLine(currentChar or self.isCarriageReturn(currentChar)):
+        if (self.isSpaceOrTab(currentChar) or self.isNewLine(currentChar) or self.isCarriageReturn(currentChar)):
             return True
 
         return False
@@ -72,5 +72,24 @@ class tokenizer:
             return True
         if (currentChar == ')'):
             return True
+        if (self.isComparisonOperator(currentChar)):
+            return True
 
         return False
+
+    def isComparisonOperator(self, currentChar):
+
+        if(currentChar == "=="):
+            return True
+        if(currentChar == "<="):
+            return True
+        if(currentChar == ">="):
+            return True
+        if(currentChar == "<"):
+            return True
+        if(currentChar == ">"):
+            return True
+        if(currentChar == "||"):
+            return True
+        if(currentChar == "&&"):
+            return True
