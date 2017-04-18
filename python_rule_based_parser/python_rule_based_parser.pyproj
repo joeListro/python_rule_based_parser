@@ -23,7 +23,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="python_rule_based_parser.py" />
-    <Compile Include="utilities\fileLoader.py">
+    <Compile Include="utilities\file_IO.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="utilities\tokenizer.py">
