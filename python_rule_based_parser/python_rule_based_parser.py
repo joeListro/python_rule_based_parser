@@ -1,7 +1,7 @@
 from pypeg2 import parse
 
-from python_rule_based_parser.utilities.file_IO import file_IO
-from python_rule_based_parser.utilities.tokenizer import tokenizer
+from utilities.file_IO import file_IO
+from utilities.tokenizer import tokenizer
 
 class python_rule_based_parser:
 

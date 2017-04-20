@@ -29,6 +29,9 @@
     <Compile Include="utilities\tokenizer.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="utilities\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="utilities\" />
