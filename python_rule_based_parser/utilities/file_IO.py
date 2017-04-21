@@ -7,8 +7,6 @@ class file_IO:
 
     def input(self, path_to_file):
         
-        code = []
-        
         with open (path_to_file, "r") as file:
             code = file.readlines()
 
@@ -18,4 +16,4 @@ class file_IO:
 
         with open (path_to_file, "w") as file:
 
-            file.write("\n".join(parsed_lines))
+            file.write("\n".join(parsed_code))
