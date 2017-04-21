@@ -4,13 +4,7 @@ from utilities.file_IO import file_IO
 from utilities.tokenizer import tokenizer
 import python_rule_based_parser
 
-#def main():
-print('Welcome to Alex, Ben, and Joe\'s Parser\n')
-print('---------------------------------------\n')
-file = input('Enter a path to the file you want to parse : ')
-parser = python_rule_based_parser
-parser.parse(file)
-#python_rule_based_parser.parse(file)
+
 
 class python_rule_based_parser:
 
@@ -24,7 +18,7 @@ class python_rule_based_parser:
 
     def parse(self, file):
         
-        fileIO = file_IO(file)
+        fileIO = file_IO()
         
         self.code_string = fileIO.input(file) 
 
@@ -35,3 +29,11 @@ class python_rule_based_parser:
         fileIO.output(file, self.parsed_code)
 
         return
+
+
+if __name__ == '__main__':
+    print('Welcome to Alex, Ben, and Joe\'s Parser\n')
+    print('---------------------------------------\n')
+    file = input('Enter a path to the file you want to parse : ')
+    parser = python_rule_based_parser()
+    parser.parse(file)
