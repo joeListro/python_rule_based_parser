@@ -10,13 +10,15 @@ def parse(file):
     code_string = fileIO.input(file)
 
     print(code_string)
+
     parsed_code = tokenizer(code_string).tokenize()
 
-	print(parsed_code)
+    print(parsed_code)
 
     fileIO.output('output.txt', parsed_code)
 
     return
+
 if __name__ == '__main__':
     print('Welcome to Alex, Ben, and Joe\'s Parser\n')
     print('---------------------------------------\n')
