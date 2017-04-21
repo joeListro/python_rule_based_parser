@@ -11,18 +11,22 @@ class tokenizer:
 
         tokens = []
 
-        currentToken = "Token00:"
+        currentToken = "Token 0:"
+
+        tokenNumber = 0
 
         for letter in self.code:
             if self.isSegueChar(letter):
                 tokens.append(currentToken)
-                currentToken = "Token00:"
+                tokenNumber = tokenNumber + 1
+                currentToken = "Token " + str(tokenNumber) + ":"
 
             if self.isSingleToken(letter):
                 tokens.append(currentToken)
-                currentToken = "Token00:"
-                tokens.append("Token00:" + letter)
-
+                tokenNumber = tokenNumber + 1
+                currentToken = "Token " + str(tokenNumber) + ":"
+                tokens.append("Token " + str(tokenNumber) + ":" + letter)
+                tokenNumber = tokenNumber + 1
             else:
                 currentToken += letter
 
