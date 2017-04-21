@@ -2,6 +2,15 @@ from pypeg2 import parse
 
 from utilities.file_IO import file_IO
 from utilities.tokenizer import tokenizer
+import python_rule_based_parser
+
+#def main():
+print('Welcome to Alex, Ben, and Joe\'s Parser\n')
+print('---------------------------------------\n')
+file = input('Enter a path to the file you want to parse : ')
+parser = python_rule_based_parser
+parser.parse(file)
+#python_rule_based_parser.parse(file)
 
 class python_rule_based_parser:
 
@@ -13,7 +22,7 @@ class python_rule_based_parser:
         
         return super().__init__()
 
-    def __parse__(self, file):
+    def parse(self, file):
         
         fileIO = file_IO(file)
         
