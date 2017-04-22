@@ -11,89 +11,87 @@ class tokenizer:
 
         tokens = []
 
-        currentToken = "Token 0:"
-
-        tokenNumber = 0
+        currentToken = ''
 
         for letter in self.code:
             if self.isSegueChar(letter):
-                tokens.append(currentToken)
-                tokenNumber = tokenNumber + 1
-                currentToken = "Token " + str(tokenNumber) + ":"
+                newToken = 'Token 01:' + currentToken
+                tokens.append(newToken)
+                currentToken = ""
 
             if self.isSingleToken(letter):
-                tokens.append(currentToken)
-                tokenNumber = tokenNumber + 1
-                currentToken = "Token " + str(tokenNumber) + ":"
-                tokens.append("Token " + str(tokenNumber) + ":" + letter)
-                tokenNumber = tokenNumber + 1
+                newToken = 'Token 02:' + letter
+                tokens.append(newToken)
+
             else:
                 currentToken += letter
 
-        return tokens
+        return '\r'.join(tokens)
 
     def isSegueChar(self, currentChar):
 
         if (self.isSpaceOrTab(currentChar) or self.isNewLine(currentChar) or self.isCarriageReturn(currentChar)):
             return True
-
-        return False
+        else:
+            return False
 
     def isSpaceOrTab(self, currentChar):
 
         if (currentChar == ' '):
             return True
-        if (currentChar == '\t'):
+        elif (currentChar == '\t'):
             return True
-
-        return False
+        else:
+            return False
 
     def isNewLine(self, currentChar):
 
         if (currentChar == '\n'):
             return True
-        
-        return False
+        else:
+            return False
 
     def isCarriageReturn(self, currentChar):
 
         if (currentChar == '\r'):
             return True
-
-        return False
+        else:
+            return False
 
     def isSingleToken(self, currentChar):
 
         if (currentChar == '{'):
             return True
-        if (currentChar == '}'):
+        elif (currentChar == '}'):
             return True
-        if (currentChar == '['):
+        elif (currentChar == '['):
             return True
-        if (currentChar == ']'):
+        elif (currentChar == ']'):
             return True
-        if (currentChar == '('):
+        elif (currentChar == '('):
             return True
-        if (currentChar == ')'):
+        elif (currentChar == ')'):
             return True
-        if (self.isComparisonOperator(currentChar)):
+        elif (self.isComparisonOperator(currentChar)):
             return True
-
-        return False
+        else:
+            return False
 
     def isComparisonOperator(self, currentChar):
 
-        if(currentChar == "=="):
+        if(currentChar == '=='):
             return True
-        if(currentChar == "<="):
+        elif(currentChar == '<='):
             return True
-        if(currentChar == ">="):
+        elif(currentChar == '>='):
             return True
-        if(currentChar == "<"):
+        elif(currentChar == '<'):
             return True
-        if(currentChar == ">"):
+        elif(currentChar == '>'):
             return True
-        if(currentChar == "||"):
+        elif(currentChar == '||'):
             return True
-        if(currentChar == "&&"):
+        elif(currentChar == '&&'):
             return True
+        else:
+            return False

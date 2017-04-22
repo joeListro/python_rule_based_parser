@@ -15,5 +15,6 @@ class file_IO:
     def output(self, path_to_file, parsed_code):
 
         with open (path_to_file, "w") as file:
+            file.write(parsed_code)
 
-            file.write("\n".join(parsed_code))
+        return
