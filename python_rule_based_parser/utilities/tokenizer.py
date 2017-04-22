@@ -14,19 +14,23 @@ class tokenizer:
         currentToken = ''
 
         for letter in self.code:
-            if self.isSegueChar(letter):
-                newToken = 'Token 01:' + currentToken
-                tokens.append(newToken)
-                currentToken = ""
-
-            if self.isSingleToken(letter):
-                newToken = 'Token 02:' + letter
-                tokens.append(newToken)
-
+            if (self.isSegueChar(letter)):
+                if (self.isSingleToken(currentToken)):
+                    newToken = 'Token 02:' + currentToken
+                    tokens.append(newToken)
+                    currentToken = ''
+                elif (self.isComparisonOperator(currentToken)):
+                    newToken = 'Token 04:' + currentToken
+                    tokens.append(newToken)
+                    currentToken = ''
+                else:
+                    newToken = 'Token 01:' + currentToken
+                    tokens.append(newToken)
+                    currentToken = ''
             else:
                 currentToken += letter
 
-        return '\r'.join(tokens)
+        return '\n'.join(tokens)
 
     def isSegueChar(self, currentChar):
 
@@ -71,8 +75,6 @@ class tokenizer:
         elif (currentChar == '('):
             return True
         elif (currentChar == ')'):
-            return True
-        elif (self.isComparisonOperator(currentChar)):
             return True
         else:
             return False

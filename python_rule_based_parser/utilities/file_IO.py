@@ -8,7 +8,7 @@ class file_IO:
     def input(self, path_to_file):
         
         with open (path_to_file, "r") as file:
-            code = file.readlines()
+            code = file.read()
 
         return code
 
