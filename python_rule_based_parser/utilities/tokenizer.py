@@ -14,20 +14,22 @@ class tokenizer:
         currentToken = ''
 
         for letter in self.code:
+            print('letter : ' + letter)
+
             if (self.isSegueChar(letter)):
-                if (self.isSingleToken(currentToken)):
-                    newToken = 'Token 02:' + currentToken
+                if (self.isComparisonOperator(currentToken)):
+                    newToken = 'Token 04:' + currentToken
                     tokens.append(newToken)
                     currentToken = ''
-                elif (self.isComparisonOperator(currentToken)):
-                    newToken = 'Token 04:' + currentToken
+                elif (self.isSingleToken(currentToken)):
+                    newToken = 'Token 02:' + currentToken
                     tokens.append(newToken)
                     currentToken = ''
                 else:
                     newToken = 'Token 01:' + currentToken
                     tokens.append(newToken)
                     currentToken = ''
-            else:
+            elif (not self.isSegueChar(letter)):
                 currentToken += letter
 
         return '\n'.join(tokens)
