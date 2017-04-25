@@ -13,89 +13,262 @@ class tokenizer:
 
         currentToken = ''
 
-        for letter in self.code:
-            print('letter : ' + letter)
+        notSingleLineComment = True
 
-            if (self.isSegueChar(letter)):
-                if (self.isComparisonOperator(currentToken)):
-                    newToken = 'Token 04:' + currentToken
-                    tokens.append(newToken)
+        notMultiLineComment = True
+
+        self.lineNumbers = 1
+
+        for letter in self.code:
+
+            currentToken += letter
+
+            if (notSingleLineComment):
+
+                if (notMultiLineComment):
+
+                    if (self.isSingleLineComment(currentToken)):
+
+
+                        notSingleLineComment = False
+
+                        currentToken = ''
+
+                    elif (self.isMultiLineCommentBegin(currentToken)):
+
+                        notMultiLineComment = False
+
+                        currentToken = ''
+
+                    elif (self.isSegueToken(currentToken)):
+
+                        currentToken = ''
+
+                    elif (self.isSingleToken(currentToken)):
+
+                        newToken = 'Token 02:' + currentToken
+
+                        print(newToken)
+
+                        tokens.append(newToken)
+
+                        currentToken = ''
+
+                    elif (self.isSingleToken(letter)):
+
+                        if (not self.isSegueToken(currentToken)):
+
+                            currentToken = currentToken[:-1]
+
+                            newToken = 'Token 01:' + currentToken
+
+                            print(newToken)
+
+                            tokens.append(newToken)
+
+                        newToken = 'Token 02:' + letter
+
+                        print(newToken)
+
+                        tokens.append(newToken)
+
+                        currentToken = ''
+
+                    elif (self.isSegueToken(letter)):
+
+                        if (self.isDoubleToken(currentToken)):
+
+                            currentToken = currentToken[:-1]
+
+                            newToken = 'Token 04:' + currentToken
+
+                            print(newToken)
+
+                            tokens.append(newToken)
+
+                            currentToken = ''
+
+                        elif (not self.isSegueToken(currentToken)):
+
+                            currentToken = currentToken[:-1]
+
+                            newToken = 'Token 01:' + currentToken
+
+                            print(newToken)
+
+                            tokens.append(newToken)
+
+                            currentToken = ''
+
+                elif (self.isMultiLineCommentEnd(currentToken)):
+
+                    notMultiLineComment = True
+
                     currentToken = ''
-                elif (self.isSingleToken(currentToken)):
-                    newToken = 'Token 02:' + currentToken
-                    tokens.append(newToken)
-                    currentToken = ''
-                else:
-                    newToken = 'Token 01:' + currentToken
-                    tokens.append(newToken)
-                    currentToken = ''
-            elif (not self.isSegueChar(letter)):
-                currentToken += letter
+
+                elif (letter == '*'):
+
+                    currentToken = letter
+
+            elif (self.isNewLine(currentToken)):
+
+                notSingleLineComment = True
+
+                currentToken = ''
+
+        lineNumbersToken = 'Total Number of Lines:' + str(self.lineNumbers)
+
+        tokens.append(lineNumbersToken)
+
+        tokens.append('**** End of Tokenizer ****')
+
+        for token in tokens:
+
+            print(token)
 
         return '\n'.join(tokens)
 
-    def isSegueChar(self, currentChar):
+    def isSegueToken(self, currentToken):
 
-        if (self.isSpaceOrTab(currentChar) or self.isNewLine(currentChar) or self.isCarriageReturn(currentChar)):
+        if (self.isSpace(currentToken) or self.isTab(currentToken) or self.isNewLine(currentToken)):
+  
             return True
+  
+        else:
+  
+            return False
+
+    def isSpace(self, currentToken):
+
+        if (currentToken == ' '):
+  
+            return True
+  
+        else:
+  
+            return False
+
+    def isTab(self, currentToken):
+        
+        if (currentToken == '\t'):
+  
+            return True
+  
+        else:
+  
+            return False
+
+    def isNewLine(self, currentToken):
+        
+        if ((currentToken == '\n') or (currentToken == '\r')):
+
+            self.lineNumbers += 1
+
+            return True
+
         else:
             return False
 
-    def isSpaceOrTab(self, currentChar):
+    def isSingleToken(self, currentToken):
 
-        if (currentChar == ' '):
+        if (currentToken == '{'):
+
             return True
-        elif (currentChar == '\t'):
+
+        elif (currentToken == '}'):
+
             return True
+
+        elif (currentToken == '['):
+
+            return True
+
+        elif (currentToken == ']'):
+
+            return True
+
+        elif (currentToken == '('):
+
+            return True
+
+        elif (currentToken == ')'):
+
+            return True
+
+        elif (currentToken == '<'):
+
+            return True
+
+        elif (currentToken == '>'):
+
+            return True
+
+        elif (currentToken == '.'):
+
+              return True
+
+        elif (currentToken == ';'):
+
+            return True
+
         else:
+
             return False
 
-    def isNewLine(self, currentChar):
 
-        if (currentChar == '\n'):
+    def isDoubleToken(self, currentToken):
+
+        if (currentToken == '=='):
+
             return True
+
+        elif (currentToken == '<='):
+
+            return True
+
+        elif (currentToken == '>='):
+
+            return True
+
+        elif (currentToken == '||'):
+
+            return True
+
+        elif (currentToken == '&&'):
+
+            return True
+
         else:
+
             return False
 
-    def isCarriageReturn(self, currentChar):
 
-        if (currentChar == '\r'):
+    def isSingleLineComment(self, currentToken):
+
+        if (currentToken == '//'):
+ 
             return True
+ 
         else:
+ 
             return False
 
-    def isSingleToken(self, currentChar):
+    def isMultiLineCommentBegin(self, currentToken):
+        
+        if (currentToken == '/*'):
 
-        if (currentChar == '{'):
             return True
-        elif (currentChar == '}'):
-            return True
-        elif (currentChar == '['):
-            return True
-        elif (currentChar == ']'):
-            return True
-        elif (currentChar == '('):
-            return True
-        elif (currentChar == ')'):
-            return True
+
         else:
+
             return False
 
-    def isComparisonOperator(self, currentChar):
+    def isMultiLineCommentEnd(self, currentToken):
 
-        if(currentChar == '=='):
+        if (currentToken == '*/'):
+
             return True
-        elif(currentChar == '<='):
-            return True
-        elif(currentChar == '>='):
-            return True
-        elif(currentChar == '<'):
-            return True
-        elif(currentChar == '>'):
-            return True
-        elif(currentChar == '||'):
-            return True
-        elif(currentChar == '&&'):
-            return True
+
         else:
+
             return False
